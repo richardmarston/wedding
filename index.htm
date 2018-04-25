@@ -7,18 +7,30 @@
             <ul>
                 <li> <a target="_self" href="#Home">Home</a></li>
                 <li> <a target="_self" href="#Venue">Venue</a></li>
-                <li> <a target="_self" href="#Food">Food</a></li>
+                <li> <a target="_self" href="#Menu">Menu</a></li>
                 <li> <a target="_self" href="#Gifts">Gift Ideas</a></li>
-                <li> <a target="_self" href="#RSVP">Contact / RSVP</a></li>
+                <li> <a target="_self" href="#RSVP">RSVP</a></li>
+                <li> <a target="_self" href="#Contact">Contact Us</a></li>
+                <li> <a target="_self" href="#Messages">Message Board</a></li>
             </ul>
+            <svg id="svg" width="300px" height="400"
+                       xmlns="http://www.w3.org/2000/svg"
+                       xmlns:xlink="http://www.w3.org/1999/xlink">
+                <image x="20" y="20"
+                       href="images/johanna.svg"
+                       id="johanna-image"
+                       width="300px"
+                       height="400px"/>
+            </svg>
         </div>
         <div id="content">
             <div class="page">
                 <h1 id="Home" align="center">Welcome</h1>
-                <p align="center">Johanna and Richard are excited to welcome you to their wedding.</p>
+                <p>Johanna and Richard are excited to welcome you to their wedding.</p>
+                 <p>If you have not yet RSVP'd with your food choices, please read the menu and then do so!</p>
             </div>
             <div class="page">
-                <h2 align="center" id="Venue">Venue</h2>
+                <h2 id="Venue">Venue</h2>
                 <div id="map" style="width:100%;height:500px"></div>
                 <script>
                     function myMap() {
@@ -30,45 +42,194 @@
                       marker.setMap(map);
                     }
                 </script>
-
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPuLk614bkFg-groirAk9ZQ__kC0Mic6k&callback=myMap"></script>
             </div>
-            <div class="page">
-                <h2 align="center" id="RSVP">RSVP</h2>
-                <div class="column">
-                    <form action="/action_page.php">
-                        <label for="fname">First Name</label>
-                        <input type="text" id="fname" name="firstname" placeholder="Your name..">
-                        <label for="lname">Last Name</label>
-                        <input type="text" id="lname" name="lastname" placeholder="Your last name..">
-                        <label for="subject">Subject</label>
-                        <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
-                        <input type="submit" value="Submit">
-                    </form>
-                </div>
+            <div class="page" id="Contact">
+                <h2 align="center">Contact</h2>
+                <form action="/action_page.php">
+                    <table align="center" margin="auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="fname">First Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="lname">Last Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="subject">Subject</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="subject" name="subject" placeholder="3 word summary..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="subject">Main text</label>
+                                </td>
+                                <td>
+                                    <textarea id="message" type="text" placeholder="Dear Johanna & Richard ..." style="height:170px"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input type="submit" value="Send!">
+                                </td>
+                            </tr>
+                        <tbody>
+                    </table>
+                </form>
+            </div>
+            <div class="page" id="RSVP">
+                <h2 align="center">RSVP</h2>
+                <form action="/action_page.php">
+                    <table align="center" margin="auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="fname">First Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="lname">Last Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Starter">Starter</label>
+                                </td>
+                                <td>
+                                    <select id="Starter">
+                                        <option value="null">Select Your Starter</option>
+                                        <option value="starter_soup">Seasonal Soup</option>
+                                        <option value="starter_beef">Beef w/Horseradish</option>
+                                        <option value="starter_salmon">Smoked Salmon w/Dill Terrine</option>
+                                        <option value="starter_tomato">Tomato Mozzarella Avocado Salad</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Main">Main Course</label>
+                                </td>
+                                <td>
+                                    <select id="Main">
+                                        <option value="null">Select Your Main Course</option>
+                                        <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
+                                        <option value="main_seabass">Sea Bass w/Lemon</option>
+                                        <option value="main_seabass">Roasted Pork Fillet</option>
+                                        <option value="main_tart">Mediterranean Vegetable Tart</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Main">High Chairs?</label>
+                                </td>
+                                <td>
+                                    <select id="Highchairs">
+                                        <option value="null">Number of High Chairs Required</option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="Special">Anything else?</label>
+                                </td>
+                                <td>
+                                    <textarea id="Special" name="subject" placeholder="Any special requirements.." style="height:170px"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <input type="submit" value="Submit">
+                                </td>
+                            </tr>
+                        </tbody>
+                     </table>
+                 </form>
             </div>
             <div class="page">
-                <h2 align="center" id="Food">Food</h2>
-                <p align="center"></p>
+                <h2 id="Menu">Menu</h2>
+                <h3>Starters</h3>
+                <p>Seasonal Soup</p>
+                <p>Thin Slices of Beef Fillet with Horseradish<p>
+                <p>Smoked Salmon & Fresh Salmon & Dill Terrine with Lemon Dressed Leaves</option>
+                <p>Tomato Mozzarella Avocado Salad</p>
+                <h3>Main Courses</h3>
+                <p>Chicken Breast w/Herbs and Lemon</p>
+                <p>Sea Bass w/Lemon</p>
+                <p>Roasted Pork Fillet</p>
+                <p>Mediterranean Vegetable Tart</p>
             </div>
             <div class="page">
-                <h2 align="center" id="Gifts">Gift Ideas</h2>
-                <p align="center"></p>
+                <h2 id="Gifts">Gift Ideas</h2>
+                <p></p>
             </div>
-        </div>
-        <div id="theme">
-            <svg id="svg" width="300px" height="400"
-                       xmlns="http://www.w3.org/2000/svg"
-                       xmlns:xlink="http://www.w3.org/1999/xlink">
-                <image x="20" y="20"
-                       href="images/johanna.svg"
-                       id="johanna-image"
-                       width="300px"
-                       height="400px"/>
-            </svg>
+            <div class="page">
+                <h2 id="Messages">Leave a Message*</h2>
+                <p>*This will be visible below.</p>
+                <form action="/action_page.php">
+                    <table align="center" margin="auto">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <label for="fname">First Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="lname">Last Name</label>
+                                </td>
+                                <td>
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <label for="message">Message</label>
+                                </td>
+                                <td>
+                                    <textarea id="message" type="text" placeholder="Dear Johanna & Richard ..." style="height:170px"></textarea>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <input type="submit" value="Send!">
+                                </td>
+                            </tr>
+                        <tbody>
+                    </table>
+                </form>
+            </div>
         </div>
     </body>
-<!--
-gmak:  AIzaSyAPuLk614bkFg-groirAk9ZQ__kC0Mic6k 
--->
 </html>
