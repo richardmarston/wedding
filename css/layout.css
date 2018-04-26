@@ -71,7 +71,7 @@ h1, h2, h3 {
     width:100%;
     height:500px;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1080px) {
   #navigation, #content {
     overflow-y: auto;
     flex-shrink: 1;
