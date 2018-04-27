@@ -42,7 +42,7 @@
             </div>
             <div class="page" id="Contact">
                 <h2 align="center">Contact</h2>
-                <form action="/action_page.php">
+                <form action="/contact" method="post">
                     <table align="center" margin="auto">
                         <tbody>
                             <tr>
@@ -71,10 +71,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="subject">Main text</label>
+                                    <label for="message">Main text</label>
                                 </td>
                                 <td>
-                                    <textarea id="message" type="text" placeholder="Dear Johanna & Richard ..." style="height:170px"></textarea>
+                                    <textarea type="text" id="message" name="message" placeholder="Dear Johanna & Richard ..." style="height:170px"></textarea>
                                 </td>
                             </tr>
                             <tr>

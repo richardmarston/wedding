@@ -1,0 +1,27 @@
+
+version: '3'
+services:
+        database:
+            container_name: dynamo
+            image:          dwmkerr/dynamodb
+
+        marston.info:
+            container_name: marston.info
+            image:          nginx
+            ports:
+              - 443:443
+            volumes:
+              - ./frontend/default.conf:/etc/nginx/conf.d/default.conf
+              - ./frontend/index.htm:/var/www/html/index.htm
+              - ./frontend/css:/var/www/html/css
+              - ./frontend/images:/var/www/html/images
+              - /etc/letsencrypt/:/etc/letsencrypt/
+
+        backend:
+            container_name: backend
+            environment:
+              - AWS_ACCESS_KEY_ID=dummy
+              - AWS_SECRET_ACCESS_KEY=dummy
+            image:          backend
+
+
