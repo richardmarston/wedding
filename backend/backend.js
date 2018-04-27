@@ -15,6 +15,12 @@ if (process.env.NODE_ENV == "test") {
     }
     AWS.config.update(config);
 }
+else {
+    let config = {
+        "region": "eu-central-1",
+    }
+    AWS.config.update(config);
+}
 
 const dynamodb = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
