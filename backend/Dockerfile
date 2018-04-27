@@ -6,6 +6,7 @@ COPY backend.js /bin/main.js
 
 RUN adduser -S backend
 WORKDIR /home/backend
+USER backend
 
-CMD /bin/main.js 80
+CMD /bin/main.js
 

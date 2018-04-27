@@ -1,6 +1,13 @@
 
 version: '2'
 services:
+        database:
+            container_name: dynamo
+            image:          dwmkerr/dynamodb
+            networks:
+                default:
+                    ipv4_address: 172.18.0.3
+
         marston.info:
             container_name: marston.info
             image:          nginx
@@ -12,13 +19,25 @@ services:
               - ./frontend/css:/var/www/html/css
               - ./frontend/images:/var/www/html/images
               - /etc/letsencrypt/:/etc/letsencrypt/
-
+            networks:
+                default:
+                    ipv4_address: 172.18.0.2
         backend:
             container_name: backend
             environment:
-              - AWS_PROFILE=submit
+              - NODE_ENV=test
             image:          backend
+            networks:
+                default:
+                    ipv4_address: 172.18.0.4
             volumes:
               - /etc/aws/:/home/backend/.aws/
+
+networks:
+    default:
+        ipam:
+          config:
+            - subnet: 172.18.0.0/16
+              gateway: 172.18.0.1
 
 
