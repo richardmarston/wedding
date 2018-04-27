@@ -25,8 +25,18 @@ else {
 const dynamodb = new AWS.DynamoDB();
 const docClient = new AWS.DynamoDB.DocumentClient();
 
+const createTable = function(schema) {
+    dynamodb.createTable(schema, function(err, data) {
+        if (err) {
+            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+        }
+    });
+}
+
 if (process.env.NODE_ENV == "test") {
-    const schema = {
+    let schema = {
         TableName : "Contact",
         KeySchema: [
             { AttributeName: "time", KeyType: "HASH"},  //Partition key
@@ -41,14 +51,35 @@ if (process.env.NODE_ENV == "test") {
             WriteCapacityUnits: 5
         }
     };
-
-    dynamodb.createTable(schema, function(err, data) {
-        if (err) {
-            console.error("Unable to create table. Error JSON:", JSON.stringify(err, null, 2));
-        } else {
-            console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
+    createTable(schema);
+    schema = {
+        TableName : "Wall",
+        KeySchema: [
+            { AttributeName: "time", KeyType: "HASH"},  //Partition key
+        ],
+        AttributeDefinitions: [
+            { AttributeName: "time", AttributeType: "N" },
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 5,
+            WriteCapacityUnits: 5
         }
-    });
+    };
+    createTable(schema);
+    schema = {
+        TableName : "RSVP",
+        KeySchema: [
+            { AttributeName: "time", KeyType: "HASH"},  //Partition key
+        ],
+        AttributeDefinitions: [
+            { AttributeName: "time", AttributeType: "N" },
+        ],
+        ProvisionedThroughput: {
+            ReadCapacityUnits: 5,
+            WriteCapacityUnits: 5
+        }
+    };
+    createTable(schema);
 }
 
 const convertPostToJson = function(postData) {
@@ -61,8 +92,7 @@ const convertPostToJson = function(postData) {
     return json;
 };
 
-const doContact = function(params) {
-    let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
+const doSubmit = function(params, attributes, table) {
     for (let index in attributes) {
         let attribute = attributes[index];
         if (params[attribute] == undefined) {
@@ -70,7 +100,7 @@ const doContact = function(params) {
             return;
         }
     }
-    let putData = { "TableName": "Contact", "Item" : params }
+    let putData = { "TableName": table, "Item" : params }
     putData["Item"]["time"] = new Date().getTime();
     docClient.put(putData, function(err, data) {
        if (err) {
@@ -92,10 +122,19 @@ http.createServer(function(request, response) {
       });
 
       request.on('end', function () {
-          let attributes = convertPostToJson(requestBody);
+          let params = convertPostToJson(requestBody);
+
           if (request.url === "/contact") {
-              console.log("Attempting contact with " + JSON.stringify(attributes));
-              doContact(attributes);
+              let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
+              doSubmit(params, attributes, "Contact");
+          }
+          if (request.url === "/wall") {
+              let attributes = [ 'firstname', 'lastname', 'message' ];
+              doSubmit(params, attributes, "Wall");
+          }
+          if (request.url === "/rsvp") {
+              let attributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs' ];
+              doSubmit(params, attributes, "RSVP");
           }
       });
   }

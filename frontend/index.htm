@@ -27,6 +27,7 @@
                 <h1 id="Home" align="center">Welcome</h1>
                 <p>Johanna and Richard are excited to welcome you to their wedding!</p>
                  <p>If you have not yet RSVP'd with your food choices, please read the menu and then do so!</p>
+                 <p>If you have then why not leave a message on the Message Board?</p>
                 <div id="map" ></div>
                 <script>
                     function myMap() {
@@ -90,7 +91,7 @@
             </div>
             <div class="page" id="RSVP">
                 <h2 align="center">RSVP</h2>
-                <form action="/action_page.php">
+                <form action="/rsvp" method="post">
                     <table align="center" margin="auto">
                         <tbody>
                             <tr>
@@ -111,10 +112,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="Starter">Starter</label>
+                                    <label for="starter">Starter</label>
                                 </td>
                                 <td>
-                                    <select id="Starter">
+                                    <select id="starter" name="starter">
                                         <option value="null">Select Your Starter</option>
                                         <option value="starter_soup">Seasonal Soup</option>
                                         <option value="starter_beef">Beef w/Horseradish</option>
@@ -125,10 +126,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="Main">Main Course</label>
+                                    <label for="main">Main Course</label>
                                 </td>
                                 <td>
-                                    <select id="Main">
+                                    <select id="main" name="main">
                                         <option value="null">Select Your Main Course</option>
                                         <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
                                         <option value="main_seabass">Sea Bass w/Lemon</option>
@@ -139,10 +140,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="Main">High Chairs?</label>
+                                    <label for="highchairs">High Chairs?</label>
                                 </td>
                                 <td>
-                                    <select id="Highchairs">
+                                    <select id="highchairs" name="highchairs">
                                         <option value="null">Number of High Chairs Required</option>
                                         <option value="0">0</option>
                                         <option value="1">1</option>
@@ -153,10 +154,10 @@
                             </tr>
                             <tr>
                                 <td>
-                                    <label for="Special">Anything else?</label>
+                                    <label for="special">Anything else?</label>
                                 </td>
                                 <td>
-                                    <textarea id="Special" name="subject" placeholder="Any special requirements.." style="height:170px"></textarea>
+                                    <textarea id="special" name="special" placeholder="Any special requirements.." style="height:170px"></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -176,10 +177,10 @@
                 <p>Smoked Salmon & Fresh Salmon & Dill Terrine with Lemon Dressed Leaves</option>
                 <p>Tomato Mozzarella Avocado Salad</p>
                 <h3>Main Courses</h3>
-                <p>Chicken Breast w/Herbs and Lemon</p>
-                <p>Sea Bass w/Lemon</p>
-                <p>Roasted Pork Fillet</p>
-                <p>Mediterranean Vegetable Tart</p>
+                <p>Chicken Breasts in Fresh Garden Herbs and Lemon Sauce</p>
+                <p>Roasted Fillets of Sea Bass with Lemon and Fennel</p>
+                <p>Roasted Pork Fillet with Rosemary, Served with Caramelised Apples</p>
+                <p>Roaster Mediterranean Vegetable Tart with Feta Cheese and Basil</p>
             </div>
             <div class="page">
                 <h2 id="Gifts">Gift Ideas</h2>
@@ -188,7 +189,7 @@
             <div class="page">
                 <h2 id="Messages">Leave a Message*</h2>
                 <p>*This will be visible below.</p>
-                <form action="/action_page.php">
+                <form action="/wall" method="post">
                     <table align="center" margin="auto">
                         <tbody>
                             <tr>
@@ -212,7 +213,7 @@
                                     <label for="message">Message</label>
                                 </td>
                                 <td>
-                                    <textarea id="message" type="text" placeholder="Dear Johanna & Richard ..." style="height:170px"></textarea>
+                                    <textarea id="message" name="message" type="text" placeholder="Hi guys! I'm going crazy waiting for your wedding!" style="height:170px"></textarea>
                                 </td>
                             </tr>
                             <tr>
