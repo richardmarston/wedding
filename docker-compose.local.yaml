@@ -15,9 +15,10 @@ services:
               - 443:443
             volumes:
               - ./frontend/default.conf:/etc/nginx/conf.d/default.conf
-              - ./frontend/index.htm:/var/www/html/index.htm
-              - ./frontend/css:/var/www/html/css
-              - ./frontend/images:/var/www/html/images
+              - ./frontend/index.htm:/var/www/testing.marston.info/html/index.htm
+              - ./frontend/notreadyyet.htm:/var/www/html/index.htm
+              - ./frontend/css:/var/www/testing.marston.info/html/css
+              - ./frontend/images:/var/www/testing.marston.info/html/images
               - /etc/letsencrypt/:/etc/letsencrypt/
             networks:
                 default:
