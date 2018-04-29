@@ -105,8 +105,10 @@ const doSubmit = function(params, attributes, table) {
     docClient.put(putData, function(err, data) {
        if (err) {
            console.error("Unable to add contact: ", JSON.stringify(putData), ". Error JSON:", JSON.stringify(err, null, 2));
+           return true;
        } else {
            console.log("PutItem succeeded:", JSON.stringify(putData));
+           return false;
        }
     });
 };
@@ -114,6 +116,9 @@ const doSubmit = function(params, attributes, table) {
 http.createServer(function(request, response) {
 
   console.log("Request received at url: " + request.url)
+  let responseCode = 303;
+  let forwardLocation = request["headers"]["referer"] + "?success=true";
+
   if (request.method == 'POST') {
       let requestBody = '';
 
@@ -126,20 +131,27 @@ http.createServer(function(request, response) {
 
           if (request.url === "/contact") {
               let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
-              doSubmit(params, attributes, "Contact");
+              if (doSubmit(params, attributes, "Contact")) {
+                  responseCode = 500;
+              }
           }
           if (request.url === "/wall") {
               let attributes = [ 'firstname', 'lastname', 'message' ];
-              doSubmit(params, attributes, "Wall");
+              if (doSubmit(params, attributes, "Wall")) {
+                  responseCode = 500;
+              }
           }
           if (request.url === "/rsvp") {
               let attributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs' ];
-              doSubmit(params, attributes, "RSVP");
+              if (doSubmit(params, attributes, "RSVP")) {
+                  responseCode = 500;
+              }
           }
       });
   }
 
-  response.writeHead(200, {"Content-Length": 0});
+  // TODO: Move this to inside doSubmit so it can respond correctly
+  response.writeHead(responseCode, {"Location": forwardLocation});
   response.end();
 
 }).listen(parseInt(port, 10));
