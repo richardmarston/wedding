@@ -118,7 +118,7 @@ const doSubmit = function(params, attributes, table, forwardLocation, response) 
     });
 };
 
-const doScan = function(response, tablename, params, and) {
+const promisifyScan = function(tablename, params) {
 
     var scanParams = {
         TableName: tablename,
@@ -138,6 +138,37 @@ const doScan = function(response, tablename, params, and) {
     });
 };
 
+const ContactAttributes = [ 'firstname', 'lastname', 'subject', 'message' ];
+const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'special' ];
+const WallAttributes = [ 'firstname', 'lastname', 'message' ];
+
+const scanContact = promisifyScan("Contact", ContactAttributes).then(
+        function(result) {
+            console.log("Scanned Contact table")
+            return { "Contact": result };
+        }, function(err) {
+            console.error("Could not scan Contact table")
+        }
+    );
+
+const scanRSVP = promisifyScan("RSVP", RSVPAttributes).then(
+        function(result) {
+            console.log("Scanned RSVP table")
+            return { "RSVP": result };
+        }, function(err) {
+            console.error("Could not scan RSVP table")
+        }
+    );
+
+const scanWall = promisifyScan("Wall", WallAttributes).then(
+        function(result) {
+            console.log("Scanned Wall table")
+            return { "Wall": result };
+        }, function(err) {
+            console.error("Could not scan Wall table")
+        }
+    );
+
 http.createServer(function(request, response) {
 
     console.log("Request received at url: " + request.url)
@@ -155,16 +186,13 @@ http.createServer(function(request, response) {
             let params = convertPostToJson(requestBody);
 
             if (request.url === "/contact") {
-                let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
-                doSubmit(params, attributes, "Contact", forwardLocation, response)
+                doSubmit(params, ContactAttributes, "Contact", forwardLocation, response)
             }
             if (request.url === "/wall") {
-                let attributes = [ 'firstname', 'lastname', 'message' ];
-                doSubmit(params, attributes, "Wall", forwardLocation, response)
+                doSubmit(params, WallAttributes, "Wall", forwardLocation, response)
             }
             if (request.url === "/rsvp") {
-                let attributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs' ];
-                doSubmit(params, attributes, "RSVP", forwardLocation, response);
+                doSubmit(params, RSVPAttributes, "RSVP", forwardLocation, response);
             }
         });
     }
@@ -178,24 +206,11 @@ http.createServer(function(request, response) {
         request.on('end', function () {
             if (request.url === "/results") {
                 Promise.all([
-                    doScan(response, "Contact", ["firstname", "lastname", "subject", "message"]).then(
-                        function(result) {
-                            console.log("Scanned Contact table")
-                            return { "Contact": result };
-                        }, function(err) {
-                            console.log("Could not scan Contact table")
-                        }
-                    ),
-                    doScan(response, "Wall", ["firstname", "lastname", "message"]).then(
-                        function(result) {
-                            console.log("Scanned Wall table")
-                            return { "Wall": result };
-                        }, function(err) {
-                            console.log("Could not scan Wall table")
-                        }
-                    )
+                    scanContact,
+                    scanRSVP,
+                    scanWall,
                 ]).then(function(data, err) {
-                    templateData = { "Contact": data[0]["Contact"], "Wall": data[1]["Wall"] };
+                    templateData = { "Contact": data[0]["Contact"], "RSVP": data[1]["RSVP"], "Wall": data[2]["Wall"] };
                     let page = resultsTemplate(templateData);
                     response.write(page);
                     response.end();

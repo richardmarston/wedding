@@ -1,22 +1,60 @@
+<!doctype html>
 <html>
+  <link rel="stylesheet" type="text/css" href="https://testing.marston.info/css/layout.css"/>
+  <style>
+    table { margin: auto; border-collapse: collapse }
+    th, tr, td { border: 1px solid black; }
+  </style>
   <body>
-    <h1>Messages</h1>
-    <table>
-      <tr>
-        {{#each Contact}}
-          <td>{{firstname}}</td>
-          <td>{{lastname}}</td>
-          <td>{{subject}}</td>
-          <td>{{message}}</td>
-        {{/each}}
-      </tr>
-      <tr>
-        {{#each Wall}}
-          <td>{{firstname}}</td>
-          <td>{{lastname}}</td>
-          <td>{{message}}</td>
-        {{/each}}
-      </tr>
-    </table>
+    <div id="navigation">
+      <ul>
+        <li> <a target="_self" href="#Messages">Messages</a></li>
+        <li> <a target="_self" href="#RSVPs">RSVPs</a></li>
+      </ul>
+    </div>
+    <div id="content">
+      <div id="Messages" class="page">
+        <h3>Messages</h3>
+        <table>
+          <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Subject</th>
+              <th>Message</th>
+          </tr>
+          {{#each Contact}}
+          <tr>
+              <td>{{firstname}}</td>
+              <td>{{lastname}}</td>
+              <td>{{subject}}</td>
+              <td>{{message}}</td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+      <div id="RSVPs" class="page">
+        <h3>RSVPs</h3>
+        <table>
+          <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Starter</th>
+              <th>Main</th>
+              <th>Highchairs</th>
+              <th>Special</th>
+          </tr>
+          {{#each RSVP}}
+          <tr>
+              <td>{{firstname}}</td>
+              <td>{{lastname}}</td>
+              <td>{{starter}}</td>
+              <td>{{main}}</td>
+              <td>{{highchairs}}</td>
+              <td>{{special}}</td>
+          </tr>
+          {{/each}}
+        </table>
+      </div>
+    </div>
   </body>
 </html>
