@@ -1,0 +1,22 @@
+<html>
+  <body>
+    <h1>Messages</h1>
+    <table>
+      <tr>
+        {{#each Contact}}
+          <td>{{firstname}}</td>
+          <td>{{lastname}}</td>
+          <td>{{subject}}</td>
+          <td>{{message}}</td>
+        {{/each}}
+      </tr>
+      <tr>
+        {{#each Wall}}
+          <td>{{firstname}}</td>
+          <td>{{lastname}}</td>
+          <td>{{message}}</td>
+        {{/each}}
+      </tr>
+    </table>
+  </body>
+</html>

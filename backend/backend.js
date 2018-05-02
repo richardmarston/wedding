@@ -1,11 +1,11 @@
-#!/usr/local/bin/node
-
 const http = require("http")
 const url = require("url")
 const path = require("path")
 const fs = require("fs")
 const port = process.argv[2] || 8888;
-
+global.Handlebars = require("handlebars");
+const results = require("./results.js")
+const resultsTemplate = global.Handlebars.templates["results"]
 const AWS = require("aws-sdk");
 
 if (process.env.NODE_ENV == "test") {
@@ -92,7 +92,10 @@ const convertPostToJson = function(postData) {
     return json;
 };
 
-const doSubmit = function(params, attributes, table) {
+const doSubmit = function(params, attributes, table, forwardLocation, response) {
+
+    let responseCode = 303;
+
     for (let index in attributes) {
         let attribute = attributes[index];
         if (params[attribute] == undefined) {
@@ -105,55 +108,105 @@ const doSubmit = function(params, attributes, table) {
     docClient.put(putData, function(err, data) {
        if (err) {
            console.error("Unable to add contact: ", JSON.stringify(putData), ". Error JSON:", JSON.stringify(err, null, 2));
-           return true;
+           forwardLocation += "?success=false"
        } else {
            console.log("PutItem succeeded:", JSON.stringify(putData));
-           return false;
+           forwardLocation += "?success=true"
        }
+       response.writeHead(responseCode, {"Location": forwardLocation});
+       response.end();
+    });
+};
+
+const doScan = function(response, tablename, params, and) {
+
+    var scanParams = {
+        TableName: tablename,
+        ProjectionExpression: params.join(", "),
+    };
+
+    return new Promise(function(resolve, reject) {
+        docClient.scan(scanParams, function (err, data) {
+            messages = [];
+            if (err) {
+                console.error("Unable to scan the table. Error JSON:", JSON.stringify(err, null, 2));
+                reject(err);
+            } else {
+                resolve(data.Items)
+            }
+        })
     });
 };
 
 http.createServer(function(request, response) {
 
-  console.log("Request received at url: " + request.url)
-  let responseCode = 303;
-  let forwardLocation = request["headers"]["referer"] + "?success=true";
+    console.log("Request received at url: " + request.url)
 
-  if (request.method == 'POST') {
-      let requestBody = '';
+    let forwardLocation = request["headers"]["referer"];
 
-      request.on('data', function (data) {
-          requestBody += data;
-      });
+    if (request.method == 'POST') {
+        let requestBody = '';
 
-      request.on('end', function () {
-          let params = convertPostToJson(requestBody);
+        request.on('data', function (data) {
+            requestBody += data;
+        });
 
-          if (request.url === "/contact") {
-              let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
-              if (doSubmit(params, attributes, "Contact")) {
-                  responseCode = 500;
-              }
-          }
-          if (request.url === "/wall") {
-              let attributes = [ 'firstname', 'lastname', 'message' ];
-              if (doSubmit(params, attributes, "Wall")) {
-                  responseCode = 500;
-              }
-          }
-          if (request.url === "/rsvp") {
-              let attributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs' ];
-              if (doSubmit(params, attributes, "RSVP")) {
-                  responseCode = 500;
-              }
-          }
-      });
-  }
+        request.on('end', function () {
+            let params = convertPostToJson(requestBody);
 
-  // TODO: Move this to inside doSubmit so it can respond correctly
-  response.writeHead(responseCode, {"Location": forwardLocation});
-  response.end();
+            if (request.url === "/contact") {
+                let attributes = [ 'firstname', 'lastname', 'subject', 'message' ];
+                doSubmit(params, attributes, "Contact", forwardLocation, response)
+            }
+            if (request.url === "/wall") {
+                let attributes = [ 'firstname', 'lastname', 'message' ];
+                doSubmit(params, attributes, "Wall", forwardLocation, response)
+            }
+            if (request.url === "/rsvp") {
+                let attributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs' ];
+                doSubmit(params, attributes, "RSVP", forwardLocation, response);
+            }
+        });
+    }
+    if (request.method == 'GET') {
+        let requestBody = '';
 
+        request.on('data', function (data) {
+            requestBody += data;
+        });
+
+        request.on('end', function () {
+            if (request.url === "/results") {
+                Promise.all([
+                    doScan(response, "Contact", ["firstname", "lastname", "subject", "message"]).then(
+                        function(result) {
+                            console.log("Scanned Contact table")
+                            return { "Contact": result };
+                        }, function(err) {
+                            console.log("Could not scan Contact table")
+                        }
+                    ),
+                    doScan(response, "Wall", ["firstname", "lastname", "message"]).then(
+                        function(result) {
+                            console.log("Scanned Wall table")
+                            return { "Wall": result };
+                        }, function(err) {
+                            console.log("Could not scan Wall table")
+                        }
+                    )
+                ]).then(function(data, err) {
+                    templateData = { "Contact": data[0]["Contact"], "Wall": data[1]["Wall"] };
+                    let page = resultsTemplate(templateData);
+                    response.write(page);
+                    response.end();
+                }).catch(function(err) {
+                    console.error("Could not scan tables")
+                    response.writeHead(500, err);
+                    response.end();
+                });
+            }
+        });
+    }
 }).listen(parseInt(port, 10));
 
 console.log("Server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");

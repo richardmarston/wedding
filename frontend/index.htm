@@ -52,7 +52,7 @@
                                     <label for="fname">First Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -60,7 +60,7 @@
                                     <label for="lname">Last Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -68,7 +68,7 @@
                                     <label for="subject">Subject</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="subject" name="subject" placeholder="3 word summary..">
+                                    <input type="text" id="subject" name="subject" placeholder="3 word summary.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -100,7 +100,7 @@
                                     <label for="fname">First Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -108,7 +108,7 @@
                                     <label for="lname">Last Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -198,7 +198,7 @@
                                     <label for="fname">First Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="fname" name="firstname" placeholder="Your name..">
+                                    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -206,7 +206,7 @@
                                     <label for="lname">Last Name</label>
                                 </td>
                                 <td>
-                                    <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
                                 </td>
                             </tr>
                             <tr>
@@ -214,7 +214,7 @@
                                     <label for="message">Message</label>
                                 </td>
                                 <td>
-                                    <textarea id="message" name="message" type="text" placeholder="Hi guys! I'm going crazy waiting for your wedding!" style="height:170px"></textarea>
+                                    <textarea id="message" name="message" type="text" placeholder="Hi guys! I'm going crazy waiting for your wedding!" style="height:170px" required></textarea>
                                 </td>
                             </tr>
                             <tr>
@@ -244,6 +244,11 @@
         if (params["success"] == "true"){
             let banner = document.getElementById("banner")
             banner.innerHTML = "<p>Message received. Thank you!</p>"
+            banner.style.display = "block";
+        }
+        else if (params["success"] == "false"){
+            let banner = document.getElementById("banner")
+            banner.innerHTML = "<p>Failed to submit message. Sorry!</p>"
             banner.style.display = "block";
         }
         else {
