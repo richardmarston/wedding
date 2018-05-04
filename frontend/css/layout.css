@@ -52,11 +52,8 @@ body {
 table {
     width: 50%;
 }
-input {
-    width: 50%;
-}
-textarea {
-    width: 50%;
+input, textarea {
+    width: 100%;
 }
 a {
     display: block;
@@ -83,20 +80,77 @@ h1, h2, h3 {
     height:500px;
 }
 @media screen and (max-width: 1080px) {
-  #navigation, #content {
-    overflow-y: auto;
-    flex-shrink: 1;
-  }
-  #svg {
-    display: none;
-  }
-  #map {
-    height:300px;
-  }
-  body {
-    flex-direction: column;            /* arrange divs left to right */
-  }
-  ul {
-    columns: 2;
-  }
+    #navigation, #content {
+        flex-shrink: 1;
+        overflow-x: hidden;
+    }
+    #navigation {
+        height: 20%;
+    }
+    #content {
+        overflow-y: auto;
+        height: 80%;
+    }
+    #svg {
+        display: none;
+    }
+    #map {
+        height:300px;
+    }
+    body {
+        overflow-x: hidden;
+        flex-direction: column;
+    }
+    #navigation div {
+        vertical-align:middle;
+        margin:auto;
+    }
+    #navigation li {
+        height: 50%;
+        border: 0px;
+        border-radius: 0px;
+        display: flex;
+        align-items: center;
+    }
+    ul {
+        margin: 0px;
+        padding: 0px;
+        height: 100%;
+        columns: 2;
+        column-gap: 0px;
+    }
+    a {
+        margin: 0px;
+    }
+    h1, h2 {
+        font-size: 14px;
+        padding-top: 30px;
+    }
+    h3 {
+        font-size: 12px;
+        padding-top: 20px;
+    }
+    textarea {
+        height: 30px;
+    }
+    input, textarea {
+        width: 100%;
+    }
+}
+@media screen and (max-width: 720px) {
+    h1, h2 {
+        font-size: 12px;
+        padding-top: 20px;
+    }
+    h3, p, label {
+        font-size: 10px;
+        padding-top: 10px;
+        margin: 3px;
+    }
+    input, textarea {
+        width: 100%;
+    }
+    select {
+        width: 50%;
+    }
 }
