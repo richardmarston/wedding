@@ -120,14 +120,18 @@ h1, h2, h3 {
         column-gap: 0px;
     }
     a {
+        font-size: 20px;
+        height: 100%;
+        width: 100%;
         margin: 0px;
+        display: flex;
     }
     h1, h2 {
-        font-size: 14px;
+        font-size: 16pt;
         padding-top: 30px;
     }
     h3 {
-        font-size: 12px;
+        font-size: 14pt;
         padding-top: 20px;
     }
     textarea {
