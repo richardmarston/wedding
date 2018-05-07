@@ -120,18 +120,18 @@ h1, h2, h3 {
         column-gap: 0px;
     }
     a {
-        font-size: 20px;
+        font-size: 24pt;
         height: 100%;
         width: 100%;
         margin: 0px;
         display: flex;
     }
     h1, h2 {
-        font-size: 16pt;
+        font-size: 24pt;
         padding-top: 30px;
     }
-    h3 {
-        font-size: 14pt;
+    h3, p, label {
+        font-size: 20pt;
         padding-top: 20px;
     }
     textarea {
@@ -142,12 +142,15 @@ h1, h2, h3 {
     }
 }
 @media screen and (max-width: 720px) {
+    a {
+        font-size: 20pt;
+    }
     h1, h2 {
-        font-size: 12px;
+        font-size: 20pt;
         padding-top: 20px;
     }
     h3, p, label {
-        font-size: 10px;
+        font-size: 14pt;
         padding-top: 10px;
         margin: 3px;
     }
