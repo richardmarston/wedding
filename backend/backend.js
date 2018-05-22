@@ -142,32 +142,6 @@ const ContactAttributes = [ 'firstname', 'lastname', 'subject', 'message' ];
 const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'special' ];
 const WallAttributes = [ 'firstname', 'lastname', 'message' ];
 
-const scanContact = promisifyScan("Contact", ContactAttributes).then(
-        function(result) {
-            console.log("Scanned Contact table")
-            return { "Contact": result };
-        }, function(err) {
-            console.error("Could not scan Contact table")
-        }
-    );
-
-const scanRSVP = promisifyScan("RSVP", RSVPAttributes).then(
-        function(result) {
-            console.log("Scanned RSVP table")
-            return { "RSVP": result };
-        }, function(err) {
-            console.error("Could not scan RSVP table")
-        }
-    );
-
-const scanWall = promisifyScan("Wall", WallAttributes).then(
-        function(result) {
-            console.log("Scanned Wall table")
-            return { "Wall": result };
-        }, function(err) {
-            console.error("Could not scan Wall table")
-        }
-    );
 
 http.createServer(function(request, response) {
 
@@ -205,6 +179,33 @@ http.createServer(function(request, response) {
 
         request.on('end', function () {
             if (request.url === "/results") {
+                const scanContact = promisifyScan("Contact", ContactAttributes).then(
+                    function(result) {
+                        console.log("Scanned Contact table")
+                        return { "Contact": result };
+                    }, function(err) {
+                        console.error("Could not scan Contact table")
+                    }
+                );
+
+                const scanRSVP = promisifyScan("RSVP", RSVPAttributes).then(
+                    function(result) {
+                        console.log("Scanned RSVP table")
+                        return { "RSVP": result };
+                    }, function(err) {
+                        console.error("Could not scan RSVP table")
+                    }
+                );
+
+                const scanWall = promisifyScan("Wall", WallAttributes).then(
+                    function(result) {
+                        console.log("Scanned Wall table")
+                        return { "Wall": result };
+                    }, function(err) {
+                        console.error("Could not scan Wall table")
+                    }
+                );
+
                 Promise.all([
                     scanContact,
                     scanRSVP,
