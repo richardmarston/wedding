@@ -3,10 +3,10 @@ all:
 	make -C backend
 
 start:
-	docker-compose up -d
+	docker-compose -f docker-compose.prod.yaml up -d
 
 stop:
-	docker-compose down || true
+	docker-compose -f docker-compose.prod.yaml down || true
 
 starttest:
 	docker-compose -f docker-compose.local.yaml up -d
