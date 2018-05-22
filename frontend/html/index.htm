@@ -6,12 +6,13 @@
         <!--# include file="nav.htm" -->
         <div id="content">
             <div id="banner"> </div>
-            <div class="page">
-                <h1 id="Home">Welcome</h1>
-                <p>Johanna and Richard are excited to welcome you to their wedding!</p>
-                <p>Please read the menu and then RSVP with your food choices!</p>
-                <p>Below is a map showing the wedding location.</p>
-                <div id="map" ></div>
+            <div id="Home" class="page">
+                <div class="biggap"></div>
+                <h1>Welcome</h1><div class="biggap"></div>
+                <p>Johanna and Richard are excited to welcome you to their wedding!</p><div class="lilgap"></div>
+                <p>Please read the menu and then RSVP with your food choices!</p><div class="lilgap"></div>
+                <p>Below is a map showing the wedding location.</p><div class="lilgap"></div>
+                <div id="map" ></div><div class="lilgap"></div>
                 <script>
                     function myMap() {
                       var myCenter = new google.maps.LatLng(50.7475732,-2.2999331);
@@ -24,101 +25,86 @@
                 </script>
                 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAPuLk614bkFg-groirAk9ZQ__kC0Mic6k&callback=myMap"></script>
             </div>
-            <div class="page">
-                <h2 id="Menu">Menu</h2>
-                <h3>Starters</h3>
-                <p>Seasonal Soup</p>
-                <p>Thin Slices of Beef Fillet with Horseradish<p>
-                <p>Smoked Salmon & Fresh Salmon & Dill Terrine with Lemon Dressed Leaves</option>
-                <p>Tomato Mozzarella Avocado Salad</p>
-                <h3>Main Courses</h3>
-                <p>Chicken Breasts in Fresh Garden Herbs and Lemon Sauce</p>
-                <p>Roasted Fillets of Sea Bass with Lemon and Fennel</p>
-                <p>Roasted Pork Fillet with Rosemary, Served with Caramelised Apples</p>
-                <p>Roaster Mediterranean Vegetable Tart with Feta Cheese and Basil</p>
+            <div id="Menu" class="page">
+                <div class="biggap"></div>
+                <h2>Menu</h2><div class="biggap"></div>
+                <h3>Starters</h3><div class="biggap"></div>
+                <p>Seasonal Soup</p><div class="lilgap"></div>
+                <p>Thin Slices of Beef Fillet with Horseradish<p><div class="lilgap"></div>
+                <p>Smoked Salmon & Fresh Salmon & Dill Terrine with Lemon Dressed Leaves</p><div class="lilgap"></div>
+                <p>Tomato Mozzarella Avocado Salad</p><div class="lilgap"></div>
+                <h3>Main Courses</h3><div class="biggap"></div>
+                <p>Chicken Breasts in Fresh Garden Herbs and Lemon Sauce</p><div class="lilgap"></div>
+                <p>Roasted Fillets of Sea Bass with Lemon and Fennel</p><div class="lilgap"></div>
+                <p>Roasted Pork Fillet with Rosemary, Served with Caramelised Apples</p><div class="lilgap"></div>
+                <p>Roasted Mediterranean Vegetable Tart with Feta Cheese and Basil</p><div class="lilgap"></div>
             </div>
             <div class="page" id="RSVP">
-                <h2 align="center">RSVP</h2>
+                <div class="biggap"></div>
+                <h2 align="center">RSVP</h2><div class="biggap"></div>
                 <form action="/rsvp" method="post">
-                    <table align="center" margin="auto">
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <label for="fname">First Name</label>
-                                </td>
-                                <td>
-                                    <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="lname">Last Name</label>
-                                </td>
-                                <td>
-                                    <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="starter">Starter</label>
-                                </td>
-                                <td>
-                                    <select id="starter" name="starter">
-                                        <option value="null">Select Your Starter</option>
-                                        <option value="starter_soup">Seasonal Soup</option>
-                                        <option value="starter_beef">Beef w/Horseradish</option>
-                                        <option value="starter_salmon">Smoked Salmon w/Dill Terrine</option>
-                                        <option value="starter_tomato">Tomato Mozzarella Avocado Salad</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="main">Main Course</label>
-                                </td>
-                                <td>
-                                    <select id="main" name="main">
-                                        <option value="null">Select Your Main Course</option>
-                                        <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
-                                        <option value="main_seabass">Sea Bass w/Lemon</option>
-                                        <option value="main_seabass">Roasted Pork Fillet</option>
-                                        <option value="main_tart">Mediterranean Vegetable Tart</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="highchairs">High Chairs?</label>
-                                </td>
-                                <td>
-                                    <select id="highchairs" name="highchairs">
-                                        <option value="null">Number of High Chairs Required</option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                        <option value="2">2</option>
-                                        <option value="3">3</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <label for="special">Anything else?</label>
-                                </td>
-                                <td>
-                                    <textarea id="special" name="special" placeholder="Any special requirements.."></textarea>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <input type="submit" value="Submit">
-                                </td>
-                            </tr>
-                        </tbody>
-                     </table>
-                 </form>
+                    <div class="rowspace"></div>
+                    <div class="middle">
+                        <div class="row">
+                            <span>First Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+                        </div>
+                        <div class="row">
+                            <span>Last Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+                        </div>
+                        <div class="row">
+                            <span>Starter</span>
+                            <div class="rowspace"></div>
+                            <select id="starter" name="starter">
+                                <option value="null">Select Your Starter</option>
+                                <option value="starter_soup">Seasonal Soup</option>
+                                <option value="starter_beef">Beef w/Horseradish</option>
+                                <option value="starter_salmon">Smoked Salmon w/Dill Terrine</option>
+                                <option value="starter_tomato">Tomato Mozzarella Avocado Salad</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <span>Main Course</span>
+                            <div class="rowspace"></div>
+                            <select id="main" name="main">
+                                <option value="null">Select Your Main Course</option>
+                                <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
+                                <option value="main_seabass">Sea Bass w/Lemon</option>
+                                <option value="main_seabass">Roasted Pork Fillet</option>
+                                <option value="main_tart">Mediterranean Vegetable Tart</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <span>High Chairs?</span>
+                            <div class="rowspace"></div>
+                            <select id="highchairs" name="highchairs">
+                                <option value="null">Number of High Chairs Required</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <span>Anything else?</span>
+                            <div class="rowspace"></div>
+                            <textarea id="special" name="special" placeholder="Any requirements.."></textarea>
+                        </div>
+                        <div class="row">
+                            <input type="submit" value="Submit">
+                        </div>
+                    </div>
+                    <div class="rowspace"></div>
+                </form>
+                <div class="lilgap"></div>
             </div>
             <div class="page" id="Contact">
+                <div class="biggap"></div>
                 <h2 align="center">Contact</h2>
+                <div class="biggap"></div>
                 <form action="/contact" method="post">
                     <table align="center" margin="auto">
                         <tbody>
@@ -164,6 +150,7 @@
                         <tbody>
                     </table>
                 </form>
+                <div class="lilgap"></div>
             </div>
         </div>
     </body>

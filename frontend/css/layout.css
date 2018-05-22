@@ -42,18 +42,34 @@ body {
     color: darkred;
 }
 .page {
+    display: flex;
+    flex-direction: column;
     height: 100%;
 }
 #content {
     order: 2;
     flex-grow: 2;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
-table {
-    width: 50%;
+form {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-grow: 1;
 }
-input, textarea {
-    width: 100%;
+.row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+.rowspace, .columnspace {
+    flex-grow: 1;
+}
+.middle {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-grow: 1;
 }
 a {
     display: block;
@@ -64,10 +80,13 @@ a {
     text-align: center;
 }
 p {
+    margin: 0px;
+    border: 0px;
     text-align: center;
 }
 h1, h2, h3 {
-    padding-top: 40px;
+    margin: 0px;
+    border: 0px;
     text-align: center;
 }
 #theme {
@@ -79,17 +98,27 @@ h1, h2, h3 {
     width:100%;
     height:500px;
 }
-textarea {
-    height: 200px;
-    width: 100%;
-    flex-grow: 3;
+.biggap {
+    flex-grow: 2;
 }
-@media screen and (max-width: 1080px) {
+.lilgap {
+    flex-grow: 1;
+}
+textarea, input, select {
+    width: 70%;
+    box-sizing: border-box;
+}
+span {
+    display: inline-flex;
+    align-items: center;
+}
+@media screen and (max-width: 1080px) and (max-height: 1920px) {
     #navigation, #content {
         flex-shrink: 1;
         overflow-x: hidden;
     }
     #navigation {
+        overflow-y: hidden;
         height: 20%;
     }
     #content {
@@ -133,45 +162,26 @@ textarea {
     }
     h1, h2 {
         font-size: 24pt;
-        padding-top: 30px;
     }
-    h3, p, label {
+    h3, p, label, input, textarea, select {
         font-size: 20pt;
-        padding-top: 20px;
-    }
-    textarea {
-        height: 600px;
-        width: 100%;
-    }
-    input {
-        width: 100%;
-        height: 60px;
-    }
-    #map {
-        height:500px;
     }
 }
-@media screen and (max-width: 720px) {
+@media screen and (max-width: 720px) and (max-height: 1080px) {
     a {
         font-size: 20pt;
     }
     h1, h2 {
         font-size: 20pt;
-        padding-top: 20px;
     }
-    h3, p, label {
+    h3, p, label, input, textarea, select {
         font-size: 14pt;
-        padding-top: 10px;
-        margin: 3px;
-    }
-    select {
-        width: 50%;
     }
     textarea {
-        height: 400px;
+    /*    height: 400px; */
         width: 100%;
     }
-    input {
+    select, input {
         width: 100%;
         height: 40px;
     }
@@ -179,31 +189,23 @@ textarea {
         height:400px;
     }
 }
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 400px) and (max-height: 640px){
     a {
         font-size: 12pt;
     }
     h1, h2 {
         font-size: 12pt;
-        padding-top: 5px;
     }
-    h3, p, label {
-        font-size: 9pt;
-        padding-top: 5px;
-        margin: 3px;
-    }
-    select {
-        width: 50%;
+    h3, p, label, input, textarea, select {
         font-size: 9pt;
     }
     textarea {
         height: 100px;
         width: 100%;
     }
-    input {
+    select, input {
         width: 100%;
         height: 14px;
-        font-size: 9pt;
     }
     #map {
         height:200px;
