@@ -164,7 +164,7 @@ span {
     h1, h2 {
         font-size: 24pt;
     }
-    h3, p, label, input, textarea, select {
+    h3, p, label, input, textarea, select, span {
         font-size: 20pt;
     }
 }
@@ -175,7 +175,7 @@ span {
     h1, h2 {
         font-size: 20pt;
     }
-    h3, p, label, input, textarea, select {
+    h3, p, label, input, textarea, select, span {
         font-size: 14pt;
     }
     textarea {
@@ -197,7 +197,7 @@ span {
     h1, h2 {
         font-size: 12pt;
     }
-    h3, p, label, input, textarea, select {
+    h3, p, label, input, textarea, select, span {
         font-size: 9pt;
     }
     textarea {
