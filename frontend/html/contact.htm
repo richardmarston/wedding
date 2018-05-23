@@ -1,0 +1,52 @@
+<!doctype html>
+<html>
+    <title>Contact Johanna and Richard</title>
+    <link rel="stylesheet" type="text/css" href="https://testing.marston.info/css/layout.css"/>
+    <body id="container">
+        <!--# include file="nav.htm" -->
+        <div id="content">
+            <!--# include file="banner.htm" -->
+            <div class="page" id="Contact">
+                <div class="biggap"></div>
+                <h2 align="center">Contact</h2>
+                <div class="biggap"></div>
+                <form action="/contact" method="post">
+                    <div class="rowspace"></div>
+                    <div class="middle">
+                        <div class="row">
+                            <span>First Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Last Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Subject</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="subject" name="subject" placeholder="Short summary.." required>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Main text</span>
+                            <div class="rowspace"></div>
+                            <textarea type="text" id="message" name="message" placeholder="Dear Johanna & Richard ..."></textarea>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Ready to send!</span>
+                            <div class="rowspace"></div>
+                            <input type="submit" value="Send message!">
+                        </div>
+                    </div>
+                    <div class="rowspace"></div>
+                </form>
+                <div class="lilgap"></div>
+            </div>
+        </div>
+    </body>
+</html>

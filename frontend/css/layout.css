@@ -61,6 +61,7 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
+    flex-grow: 1.2;
 }
 .rowspace, .columnspace {
     flex-grow: 1;
@@ -99,7 +100,7 @@ h1, h2, h3 {
     height:500px;
 }
 .biggap {
-    flex-grow: 2;
+    flex-grow: 1.2;
 }
 .lilgap {
     flex-grow: 1;

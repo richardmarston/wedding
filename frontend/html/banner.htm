@@ -1,0 +1,31 @@
+
+<div id="banner"> </div>
+<script type="text/javascript">
+    let urlTokens = window.location.href.split('?')
+    let pairs = urlTokens.slice(1)
+    let params = {}
+    for (let index in pairs) {
+        let pair = pairs[index]
+        let param = pair.split('=');
+        if (param.length == 2){
+            params[param[0]] = param[1];
+        }
+    }
+    if (params["success"] == "true"){
+        let banner = document.getElementById("banner")
+        banner.innerHTML = "<p>Message received. Thank you!</p>"
+        banner.style.display = "block";
+    }
+    else if (params["success"] == "false"){
+        let banner = document.getElementById("banner")
+        banner.innerHTML = "<p>Failed to submit message. Sorry!</p>"
+        banner.style.display = "block";
+    }
+    else {
+        banner.style.display = "none";
+    }
+    /*  Clear GET parameters */
+    if(typeof window.history.pushState == 'function') {
+        window.history.pushState({}, "Hide", urlTokens[0]);
+    }
+</script>

@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+    <title>RSVP for Johanna and Richard's Wedding - 21st July 2018</title>
+    <link rel="stylesheet" type="text/css" href="https://testing.marston.info/css/layout.css"/>
+    <body id="container">
+        <!--# include file="nav.htm" -->
+        <div id="content">
+            <!--# include file="banner.htm" -->
+            <div class="page" id="RSVP">
+                <div class="biggap"></div>
+                <h2 align="center">RSVP</h2><div class="biggap"></div>
+                <form action="/rsvp" method="post">
+                    <div class="rowspace"></div>
+                    <div class="middle">
+                        <div class="row">
+                            <span>First Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Last Name</span>
+                            <div class="rowspace"></div>
+                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Starter</span>
+                            <div class="rowspace"></div>
+                            <select id="starter" name="starter">
+                                <option value="null">Select Your Starter</option>
+                                <option value="starter_soup">Seasonal Soup</option>
+                                <option value="starter_beef">Beef w/Horseradish</option>
+                                <option value="starter_salmon">Smoked Salmon w/Dill Terrine</option>
+                                <option value="starter_tomato">Tomato Mozzarella Avocado Salad</option>
+                            </select>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Main Course</span>
+                            <div class="rowspace"></div>
+                            <select id="main" name="main">
+                                <option value="null">Select Your Main Course</option>
+                                <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
+                                <option value="main_seabass">Sea Bass w/Lemon</option>
+                                <option value="main_seabass">Roasted Pork Fillet</option>
+                                <option value="main_tart">Mediterranean Vegetable Tart</option>
+                            </select>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>High Chairs?</span>
+                            <div class="rowspace"></div>
+                            <select id="highchairs" name="highchairs">
+                                <option value="null">Number of High Chairs Required</option>
+                                <option value="0">0</option>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                            </select>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>Anything else?</span>
+                            <div class="rowspace"></div>
+                            <textarea id="special" name="special" placeholder="Any requirements.."></textarea>
+                        </div>
+                        <div class="lilgap"></div>
+                        <div class="row">
+                            <span>All done!</span>
+                            <div class="rowspace"></div>
+                            <input type="submit" value="Submit">
+                        </div>
+                    </div>
+                    <div class="rowspace"></div>
+                </form>
+                <div class="lilgap"></div>
+            </div>
+        </div>
+    </body>
+</html>

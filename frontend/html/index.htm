@@ -5,7 +5,6 @@
     <body id="container">
         <!--# include file="nav.htm" -->
         <div id="content">
-            <div id="banner"> </div>
             <div id="Home" class="page">
                 <div class="biggap"></div>
                 <h1>Welcome</h1><div class="biggap"></div>
@@ -39,68 +38,7 @@
                 <p>Roasted Pork Fillet with Rosemary, Served with Caramelised Apples</p><div class="lilgap"></div>
                 <p>Roasted Mediterranean Vegetable Tart with Feta Cheese and Basil</p><div class="lilgap"></div>
             </div>
-            <div class="page" id="RSVP">
-                <div class="biggap"></div>
-                <h2 align="center">RSVP</h2><div class="biggap"></div>
-                <form action="/rsvp" method="post">
-                    <div class="rowspace"></div>
-                    <div class="middle">
-                        <div class="row">
-                            <span>First Name</span>
-                            <div class="rowspace"></div>
-                            <input type="text" id="fname" name="firstname" placeholder="Your name.." required>
-                        </div>
-                        <div class="row">
-                            <span>Last Name</span>
-                            <div class="rowspace"></div>
-                            <input type="text" id="lname" name="lastname" placeholder="Your last name.." required>
-                        </div>
-                        <div class="row">
-                            <span>Starter</span>
-                            <div class="rowspace"></div>
-                            <select id="starter" name="starter">
-                                <option value="null">Select Your Starter</option>
-                                <option value="starter_soup">Seasonal Soup</option>
-                                <option value="starter_beef">Beef w/Horseradish</option>
-                                <option value="starter_salmon">Smoked Salmon w/Dill Terrine</option>
-                                <option value="starter_tomato">Tomato Mozzarella Avocado Salad</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <span>Main Course</span>
-                            <div class="rowspace"></div>
-                            <select id="main" name="main">
-                                <option value="null">Select Your Main Course</option>
-                                <option value="main_chicken">Chicken Breast w/Herbs and Lemon</option>
-                                <option value="main_seabass">Sea Bass w/Lemon</option>
-                                <option value="main_seabass">Roasted Pork Fillet</option>
-                                <option value="main_tart">Mediterranean Vegetable Tart</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <span>High Chairs?</span>
-                            <div class="rowspace"></div>
-                            <select id="highchairs" name="highchairs">
-                                <option value="null">Number of High Chairs Required</option>
-                                <option value="0">0</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                            </select>
-                        </div>
-                        <div class="row">
-                            <span>Anything else?</span>
-                            <div class="rowspace"></div>
-                            <textarea id="special" name="special" placeholder="Any requirements.."></textarea>
-                        </div>
-                        <div class="row">
-                            <input type="submit" value="Submit">
-                        </div>
-                    </div>
-                    <div class="rowspace"></div>
-                </form>
-                <div class="lilgap"></div>
-            </div>
+
             <div class="page" id="Contact">
                 <div class="biggap"></div>
                 <h2 align="center">Contact</h2>
@@ -154,33 +92,4 @@
             </div>
         </div>
     </body>
-    <script type="text/javascript">
-        let urlTokens = window.location.href.split('?')
-        let pairs = urlTokens.slice(1)
-        let params = {}
-        for (let index in pairs) {
-            let pair = pairs[index]
-            let param = pair.split('=');
-            if (param.length == 2){
-                params[param[0]] = param[1];
-            }
-        }
-        if (params["success"] == "true"){
-            let banner = document.getElementById("banner")
-            banner.innerHTML = "<p>Message received. Thank you!</p>"
-            banner.style.display = "block";
-        }
-        else if (params["success"] == "false"){
-            let banner = document.getElementById("banner")
-            banner.innerHTML = "<p>Failed to submit message. Sorry!</p>"
-            banner.style.display = "block";
-        }
-        else {
-            banner.style.display = "none";
-        }
-        /*  Clear GET parameters */
-        if(typeof window.history.pushState == 'function') {
-            window.history.pushState({}, "Hide", urlTokens[0]);
-        }
-    </script>
 </html>
