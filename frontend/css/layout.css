@@ -55,13 +55,16 @@ form {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex-grow: 1;
+    flex-grow: 3;
 }
 .row {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
-    flex-grow: 1.2;
+    flex-grow: 1;
+}
+.tallrow {
+    flex-grow: 3;
 }
 .rowspace, .columnspace {
     flex-grow: 1;
