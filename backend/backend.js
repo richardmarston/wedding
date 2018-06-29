@@ -87,6 +87,9 @@ const convertPostToJson = function(postData) {
     let pairs = postData.split('&');
     for (let index in pairs) {
         let items = pairs[index].split('=')
+        if (items[1] == "") {
+            items[1] = "-";
+        }
         json[items[0]] = items[1]
     }
     return json;
@@ -141,7 +144,6 @@ const promisifyScan = function(tablename, params) {
 const ContactAttributes = [ 'firstname', 'lastname', 'subject', 'message' ];
 const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'song', 'special' ];
 const WallAttributes = [ 'firstname', 'lastname', 'message' ];
-
 
 http.createServer(function(request, response) {
 
