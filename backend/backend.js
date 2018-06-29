@@ -139,7 +139,7 @@ const promisifyScan = function(tablename, params) {
 };
 
 const ContactAttributes = [ 'firstname', 'lastname', 'subject', 'message' ];
-const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'special' ];
+const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'song', 'special' ];
 const WallAttributes = [ 'firstname', 'lastname', 'message' ];
 
 
