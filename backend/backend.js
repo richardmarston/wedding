@@ -102,7 +102,9 @@ const doSubmit = function(params, attributes, table, forwardLocation, response) 
     for (let index in attributes) {
         let attribute = attributes[index];
         if (params[attribute] == undefined) {
-            console.error("Incomplete contact message: " + JSON.stringify(params));
+            console.error("Incomplete " + table + " entry: " + JSON.stringify(params));
+            response.writeHead(400, {"msg": "Incomplete table entry"});
+            response.end();
             return;
         }
     }
