@@ -1,5 +1,7 @@
 <!doctype html>
 <html>
+
+  {{zeroCount}}
   <link rel="stylesheet" type="text/css" href="https://wedding.marston.info/css/layout.css"/>
   <style>
     table { margin: auto; border-collapse: collapse }
@@ -45,6 +47,7 @@
               <th>Special</th>
           </tr>
           {{#each RSVP}}
+          {{countUp this}}
           <tr>
               <td>{{firstname}}</td>
               <td>{{lastname}}</td>
@@ -56,6 +59,7 @@
           </tr>
           {{/each}}
         </table>
+        {{totals}}
       </div>
     </div>
   </body>

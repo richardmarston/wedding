@@ -143,9 +143,68 @@ const promisifyScan = function(tablename, params) {
     });
 };
 
+var totals = {'starters':{ 'all': 0 }, 'mains': { 'all': 0 }};
+const countUp = function(starter, main) {
+    if (totals['starters'][starter] === undefined) {
+        totals['starters'][starter] = 0;
+    }
+    if (totals['mains'][main] === undefined) {
+        totals['mains'][main] = 0;
+    }
+    totals['starters'][starter]++;
+    totals['starters']['all']++;
+    totals['mains'][main]++;
+    totals['mains']['all']++;
+};
+
+Handlebars.registerHelper('zeroCount', function(object) {
+    Object.entries(totals['starters']).forEach(function(starter) {
+        totals['starters'][starter[0]] = 0;
+    });
+    Object.entries(totals['mains']).forEach(function(main) {
+        totals['mains'][main[0]] = 0;
+    });
+    totals['starters']['all'] = 0;
+    totals['mains']['all'] = 0;
+});
+
+Handlebars.registerHelper('countUp', function(object) {
+
+    countUp(object['starter'], object['main'])
+    return new Handlebars.SafeString("");
+});
+
+Handlebars.registerHelper('totals', function() {
+    starterString = "<th>Starter</th><th>Number</th>";
+    mainString = "<th>Main</th><th>Number</th>";
+    Object.entries(totals['starters']).forEach(function(starter) {
+        starterString += "<tr><td>" + starter[0] + "</td><td>" + starter[1] + "</td></tr>";
+    });
+    starterString += "<tr><td>All</td><td>" + totals['starters']['all'] + "</td></tr>";
+    Object.entries(totals['mains']).forEach(function(main) {
+        mainString += "<tr><td>" + main[0] + "</td><td>" + main[1] + "</td></tr>";
+    });
+    mainString += "<tr><td>All</td><td>" + totals['mains']['all'] + "</td></tr>";
+    return new Handlebars.SafeString("<table>" + starterString + mainString + "</table>");
+});
+
+
+
 const ContactAttributes = [ 'firstname', 'lastname', 'subject', 'message' ];
 const RSVPAttributes = [ 'firstname', 'lastname', 'starter', 'main', 'highchairs', 'song', 'special' ];
 const WallAttributes = [ 'firstname', 'lastname', 'message' ];
+
+function compare(a,b) {
+  if (a.firstname < b.firstname)
+    return -1;
+  if (a.firstname > b.firstname)
+    return 1;
+  if (a.lastname < b.lastname)
+    return -1;
+  if (a.lastname > b.lastname)
+    return 1;
+  return 0;
+}
 
 http.createServer(function(request, response) {
 
@@ -186,7 +245,7 @@ http.createServer(function(request, response) {
                 const scanContact = promisifyScan("Contact", ContactAttributes).then(
                     function(result) {
                         console.log("Scanned Contact table")
-                        return { "Contact": result };
+                        return { "Contact": result.sort(compare) };
                     }, function(err) {
                         console.error("Could not scan Contact table")
                     }
@@ -195,7 +254,7 @@ http.createServer(function(request, response) {
                 const scanRSVP = promisifyScan("RSVP", RSVPAttributes).then(
                     function(result) {
                         console.log("Scanned RSVP table")
-                        return { "RSVP": result };
+                        return { "RSVP": result.sort(compare) };
                     }, function(err) {
                         console.error("Could not scan RSVP table")
                     }
@@ -204,7 +263,7 @@ http.createServer(function(request, response) {
                 const scanWall = promisifyScan("Wall", WallAttributes).then(
                     function(result) {
                         console.log("Scanned Wall table")
-                        return { "Wall": result };
+                        return { "Wall": result.sort(compare) };
                     }, function(err) {
                         console.error("Could not scan Wall table")
                     }
@@ -220,8 +279,8 @@ http.createServer(function(request, response) {
                     response.write(page);
                     response.end();
                 }).catch(function(err) {
-                    console.error("Could not scan tables")
-                    response.writeHead(500, err);
+                    console.error("Could not scan tables: " + err)
+                    response.writeHead(500, "Could not scan tables: " + err);
                     response.end();
                 });
             }
